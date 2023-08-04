@@ -1,0 +1,86 @@
+<div class="container-fluid">
+  <header class="jumbotron">
+    <h2 align="center">|Template Driven From|</h2>
+  </header>
+    <div class="container">
+
+    <form  #userData="ngForm">
+
+    <div class="form-group">
+      <label>NAME:</label>
+      <input type="text" name="n1"
+      #name="ngModel"
+
+      [class.is-invalid]="name.invalid && (name.dirty || name.touched)"
+
+      pattern="^[a-zA-Z]{3,32}$"
+
+      [(ngModel)]="myForm.name"
+      class="form-control" placeholder="ENTER YOUR NAME" required>
+      <section *ngIf="name.invalid && (name.dirty || name.touched)">
+    <small class="text-danger" *ngIf="name.errors?.['required']">Name is Required</small>
+    <small class="text-danger" *ngIf="name.errors?.['pattern']">Name can't number min 3 &max 32 char</small>
+      </section>
+
+    </div>
+  
+    <div class="form-group">
+      <label>PHONE:</label>
+      <input type="number" name="p1"
+      #phone="ngModel"
+
+      [class.is-invalid]="phone.invalid &&(phone.dirty || phone.touched)"
+    
+
+      pattern="^[0-9]{10}$"
+
+      [(ngModel)]="myForm.phone"
+      class="form-control" placeholder="ENTER YOUR PHONE" required>
+      <section *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+        <small class="text-danger" *ngIf="phone.errors?.['required']">Phone is Required
+
+        </small>
+        <small class="text-danger" *ngIf="phone.errors?.['pattern']">Put valid ph no
+
+        </small>
+          </section>
+    </div>
+
+    <div class="form-group">
+      <label>EMAIL:</label>
+      <input type="email" name="e1" 
+      #email="ngModel"
+     
+      [(ngModel)]="myForm.email"
+      class="form-control" placeholder="ENTER YOUR EMAIL" required>
+    </div>
+
+    <div class="form-group">
+      <label>PASSWORD"</label>
+      <input [type]="show? 'text':'password' " name="pas1" 
+      [(ngModel)]="myForm.pass1"
+      #pass1="ngModel"
+      class="form-control" placeholder="ENTER YOUR PASSWORD" required>
+      <button class="btn btn-sm btn-outline-info" (click)="password()">{{show ? 'Hide':'Show'}}</button>
+    </div>
+
+    <div class="form-group">
+      <label>CONFIRM PASSWORD:</label>
+      <input type="password" name="pas2" 
+      [(ngModel)]="myForm.pass2"
+      (keyup)="checkpass(pass1,pass2)"
+      #pass2="ngModel"
+      class="form-control" placeholder="ENTER YOUR CONFIRM PASSWORD" required>
+      <section *ngIf="misMatchPassError">
+        <small class="text-danger">Password did't mathched</small>
+      </section>
+    </div>
+    <div class="form-group">
+      <button [disabled]="userData.invalid || misMatchPassError "   class="btn btn-success" (click)="submit(userData)">SUBMIT</button>
+    </div>
+    
+  </form>
+
+    </div>
+  
+</div>
